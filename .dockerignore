@@ -5,6 +5,7 @@
 # Bash Scripts
 /scripts/
 
-# Documentation
+# License and README contents
 /LICENSE
 /README.md
+/postgres_dojo.png
