@@ -1,7 +1,10 @@
-# Git files
+# Git Files
 /.git/
 /.gitignore
 
-# Documents
+# Bash Scripts
+/scripts/
+
+# Documentation
 /LICENSE
 /README.md
