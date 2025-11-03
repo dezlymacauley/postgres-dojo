@@ -7,9 +7,9 @@ setopt HIST_IGNORE_ALL_DUPS
 
 # Use `$HOME` and not `$HOME/` because for this container I have set $HOME
 # to `/`
-alias edit_pgcli="cd $HOME/.config/pgcli/config && nvim ."
-alias edit_starship="cd $HOME/.config/starship.toml && nvim ."
-alias edit_zsh="cd $HOME/.config/.zshrc && nvim ."
+alias edit_pgcli="cd $HOME/.config/pgcli/ && nvim config"
+alias edit_starship="cd $HOME/.config/ && nvim starship.toml"
+alias edit_zsh="cd $HOME/.config/ && nvim .zshrc"
 
 # On Debian systems the command for `bat` is `batcat` to prevent 
 # a clash with an existing package, however I have confirmed that there is no
