@@ -5,6 +5,13 @@
 # and the operating system that will be used is Trixie (aka Debian 13.0)
 FROM postgres:18.0-trixie
 
+# Create the working directory
+RUN mkdir -p /home/postgres-dojo-user
+
+# Set this as both HOME and WORKDIR
+ENV HOME=/home/postgres-dojo-user
+WORKDIR /home/postgres-dojo-user
+
 #______________________________________________________________________________
 # SECTION: Install CLI tools
 
@@ -43,16 +50,8 @@ RUN apt-get update \
 #______________________________________________________________________________
 # SECTION: Set the value of the environment variables inside the container
 
-# NOTE: This is for documentation purposes. Do not change these variables
-
 # Sets the SHELL used
 ENV SHELL=/usr/bin/zsh
-
-# This is the default on most containers
-ENV HOME=/
-
-# This is the default on most containers
-ENV USER=root
 
 #______________________________________________________________________________
 # SECTION: Load the configuration files
@@ -70,8 +69,9 @@ COPY dojo-configs/ ${HOME}/.config/
 
 #______________________________________________________________________________
 
-# This will add the line: "source /root/.config/.zshrc" to the .zshrc file
-# at the root of the container.
+# This will add the line: 
+# "source /home/postgres-dojo-user/.config/.zshrc" 
+# to the .zshrc file at the root of the container.
 
 # The reason for the this is because zsh expects a .zshrc file to be in
 # $HOME/.zshrc, however I want the `.zshrc` file to be in `$HOME/.config`,
@@ -86,8 +86,9 @@ RUN echo "source ${HOME}/.config/.zshrc" > ${HOME}/.zshrc
 
 #______________________________________________________________________________
 
-# Ensures sure that both /root/.config (and everything inside it) 
-# and /root/.zshrc are owned by the root user and root group"
+# Ensure that both /home/postgres-dojo-user/.config (and everything inside it) 
+# and /home/postgres-dojo-user/.zshrc are owned by the root user 
+# and root group
 RUN chown -R root:root ${HOME}/.config ${HOME}/.zshrc
 
 #______________________________________________________________________________

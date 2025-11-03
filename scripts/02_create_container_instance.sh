@@ -9,34 +9,32 @@ PROJECT_ROOT="$(cd "$SCRIPTS_DIR/.." && pwd)"
 #______________________________________________________________________________
 
 # NOTE: It's bad practice to create a volume for the entire container.
-# Only create a volume for directories that need to be persistent
 
+# Only create a volume for directories that need to be persistent
 # This volume will be attached to the the container directory:
 # /var/lib/postgresql  
-
 # So even if the container instance is deleted, when a new instance is created
 # all of the databases created by the user of Postgres Dojo will 
 # be automatically available.
-
 # A new volume will only be created if there is no existing volume,
 # so you don't need to worry about data being overwritten.
+
 docker volume inspect postgres-dojo-instance-01-saved-databases >/dev/null 2>&1 || \
 docker volume create postgres-dojo-instance-01-saved-databases
 
 #______________________________________________________________________________
 
 # This volume will be attached to the the container directory:
-# /root/.config/
-
+# /home/postgres-dojo-user
 # So even if the container instance is deleted, when a new instance is created
-# all of the Postgres Dojo configuration files will be 
-# automatically available. The user is also free to edit these files,
-# and the changes will be saved.
-
+# all of the files in /home/postgres-dojo-user will be 
+# automatically available. The user is also free to save notes,
+# edit configuration files and these files and the changes will be saved.
 # A new volume will only be created if there is no existing volume,
 # so you don't need to worry about data being overwritten.
-docker volume inspect postgres-dojo-instance-01-saved-configs >/dev/null 2>&1 || \
-docker volume create postgres-dojo-instance-01-saved-configs
+
+docker volume inspect postgres-dojo-instance-01-user-home >/dev/null 2>&1 || \
+docker volume create postgres-dojo-instance-01-user-home
 
 #______________________________________________________________________________
 
@@ -51,5 +49,5 @@ docker run -d \
 -e POSTGRES_DB=postgres \
 -p 127.0.0.1:5432:5432 \
 -v postgres-dojo-instance-01-saved-databases:/var/lib/postgresql \
--v postgres-dojo-instance-01-saved-configs:/.config \
+-v postgres-dojo-instance-01-user-home:/home/postgres-dojo-user \
 dezlymacauley/postgres-dojo:0.0.1
