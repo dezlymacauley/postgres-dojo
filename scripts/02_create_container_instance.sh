@@ -11,27 +11,45 @@ PROJECT_ROOT="$(cd "$SCRIPTS_DIR/.." && pwd)"
 # NOTE: It's bad practice to create a volume for the entire container.
 # Only create a volume for directories that need to be persistent
 
-# Create the Postgres database volume if it doesn't exist
-# docker volume inspect postgres-dojo-instance-01-db-data >/dev/null 2>&1 || \
-# docker volume create postgres-dojo-instance-01-db-data
+# This volume will be attached to the the container directory:
+# /var/lib/postgresql  
 
-# Create a volume for config files if it doesn't exist
-# docker volume inspect postgres-dojo-instance-01-dojo-configs >/dev/null 2>&1 || \
-# docker volume create postgres-dojo-instance-01-dojo-configs
+# So even if the container instance is deleted, when a new instance is created
+# all of the databases created by the user of Postgres Dojo will 
+# be automatically available.
+
+# A new volume will only be created if there is no existing volume,
+# so you don't need to worry about data being overwritten.
+docker volume inspect postgres-dojo-instance-01-saved-databases >/dev/null 2>&1 || \
+docker volume create postgres-dojo-instance-01-saved-databases
+
+#______________________________________________________________________________
+
+# This volume will be attached to the the container directory:
+# /root/.config/
+
+# So even if the container instance is deleted, when a new instance is created
+# all of the Postgres Dojo configuration files will be 
+# automatically available. The user is also free to edit these files,
+# and the changes will be saved.
+
+# A new volume will only be created if there is no existing volume,
+# so you don't need to worry about data being overwritten.
+docker volume inspect postgres-dojo-instance-01-saved-configs >/dev/null 2>&1 || \
+docker volume create postgres-dojo-instance-01-saved-configs
 
 #______________________________________________________________________________
 
 # Remove container if it exists
 docker rm -f postgres-dojo-instance-01 >/dev/null 2>&1 || true
 
-# Run the container
+# Run the container with the attached volumes
 docker run -d \
 --name postgres-dojo-instance-01 \
 -e POSTGRES_PASSWORD=mysecretpassword \
 -e POSTGRES_USER=postgres \
 -e POSTGRES_DB=postgres \
 -p 127.0.0.1:5432:5432 \
+-v postgres-dojo-instance-01-saved-databases:/var/lib/postgresql \
+-v postgres-dojo-instance-01-saved-configs:/root/.config \
 dezlymacauley/postgres-dojo:0.0.1
-
-# -v postgres-dojo-instance-01-db-data:/var/lib/postgresql \
-# -v postgres-dojo-instance-01-dojo-configs:/.config \
