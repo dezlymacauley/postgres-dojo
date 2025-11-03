@@ -43,26 +43,51 @@ RUN apt-get update \
 #______________________________________________________________________________
 # SECTION: Set the value of the environment variables inside the container
 
+# NOTE: This is for documentation purposes. Do not change these variables
+
 # Sets the SHELL used
 ENV SHELL=/usr/bin/zsh
 
-# Sets the HOME directory
+# This is the default on most containers
 ENV HOME=/root
 
-#______________________________________________________________________________
-# SECTION: Loade the configuration files
+# This is the default on most containers
+ENV USER=root
 
-# Create directory called `.config` at the `HOME` directory of the container
-RUN mkdir -p ${HOME}/.config
+#______________________________________________________________________________
+# SECTION: Load the configuration files
+
+# This will create the following inside a container created from this image:
+# A .zshrc file located at: $HOME/.zshrc
+# A .config directory locatated: 
+RUN mkdir -p ${HOME}/.config && touch ${HOME}/.zshrc
 
 # Copy the `dojo-configs` directory from this repo,
-# and save it in the `HOME` directory of the container as `.config`
+# rename it to `.config`, and then save it to this location 
+# inside the container:
+# $HOME/.config/
 COPY dojo-configs/ ${HOME}/.config/
 
-# Create a minimal .zshrc that sources .config/.zshrc
+#______________________________________________________________________________
+
+# This will add the line: "source /root/.config/.zshrc" to the .zshrc file
+# at the root of the container.
+
+# The reason for the this is because zsh expects a .zshrc file to be in
+# $HOME/.zshrc, however I want the `.zshrc` file to be in `$HOME/.config`,
+# because when the container is created, a volume is attached to 
+# SHOME/.config to ensure that any changes made to the configuration file
+# are saved even if the container is deleted.
+
+# So the simplest way to solve this problem is to simply create a .zshrc
+# at the root of the container, and then have it load the .zshrc file that
+# is located at $HOME/.config
 RUN echo "source ${HOME}/.config/.zshrc" > ${HOME}/.zshrc
 
-# Ensure correct ownership (root owns everything)
+#______________________________________________________________________________
+
+# Ensures sure that both /root/.config (and everything inside it) 
+# and /root/.zshrc are owned by the root user and root group"
 RUN chown -R root:root ${HOME}/.config ${HOME}/.zshrc
 
 #______________________________________________________________________________

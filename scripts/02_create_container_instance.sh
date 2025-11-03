@@ -12,12 +12,12 @@ PROJECT_ROOT="$(cd "$SCRIPTS_DIR/.." && pwd)"
 # Only create a volume for directories that need to be persistent
 
 # Create the Postgres database volume if it doesn't exist
-docker volume inspect postgres-dojo-instance-01-db-data >/dev/null 2>&1 || \
-docker volume create postgres-dojo-instance-01-db-data
+# docker volume inspect postgres-dojo-instance-01-db-data >/dev/null 2>&1 || \
+# docker volume create postgres-dojo-instance-01-db-data
 
 # Create a volume for config files if it doesn't exist
-docker volume inspect postgres-dojo-instance-01-dojo-configs >/dev/null 2>&1 || \
-docker volume create postgres-dojo-instance-01-dojo-configs
+# docker volume inspect postgres-dojo-instance-01-dojo-configs >/dev/null 2>&1 || \
+# docker volume create postgres-dojo-instance-01-dojo-configs
 
 #______________________________________________________________________________
 
@@ -31,6 +31,7 @@ docker run -d \
 -e POSTGRES_USER=postgres \
 -e POSTGRES_DB=postgres \
 -p 127.0.0.1:5432:5432 \
--v postgres-dojo-instance-01-db-data:/var/lib/postgresql \
--v postgres-dojo-instance-01-dojo-configs:/root/.config \
 dezlymacauley/postgres-dojo:0.0.1
+
+# -v postgres-dojo-instance-01-db-data:/var/lib/postgresql \
+# -v postgres-dojo-instance-01-dojo-configs:/.config \
