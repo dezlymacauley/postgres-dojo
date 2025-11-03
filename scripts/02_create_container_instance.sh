@@ -51,5 +51,5 @@ docker run -d \
 -e POSTGRES_DB=postgres \
 -p 127.0.0.1:5432:5432 \
 -v postgres-dojo-instance-01-saved-databases:/var/lib/postgresql \
--v postgres-dojo-instance-01-saved-configs:/root/.config \
+-v postgres-dojo-instance-01-saved-configs:/.config \
 dezlymacauley/postgres-dojo:0.0.1

@@ -49,7 +49,7 @@ RUN apt-get update \
 ENV SHELL=/usr/bin/zsh
 
 # This is the default on most containers
-ENV HOME=/root
+ENV HOME=/
 
 # This is the default on most containers
 ENV USER=root

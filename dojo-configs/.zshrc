@@ -5,9 +5,9 @@ setopt appendhistory
 setopt sharehistory
 setopt HIST_IGNORE_ALL_DUPS
 
-alias edit_ghostty="cd $HOME/.config/ghostty/ && nvim ."
-alias edit_hyprland="cd $HOME/.config/hypr/ && nvim ."
-alias edit_neovim="cd $HOME/.config/nvim/ && nvim ."
+alias edit_pgcli="cd $HOME/.config/pgcli/config && nvim ."
+alias edit_starship="cd $HOME/.config/starship.toml && nvim ."
+alias edit_zsh="cd $HOME/.config/.zshrc && nvim ."
 
 # On Debian systems the command for `bat` is `batcat` to prevent 
 # a clash with an existing package, however I have confirmed that there is no
