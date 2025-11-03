@@ -21,12 +21,12 @@ alias ls="lsd"
 eval "$(starship init zsh)"
 
 # ZSH Autosuggestions
-if [[ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+if [[ -f /usr/share/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
     ZSH_AUTOSUGGEST_USE_ASYNC=true
-    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /usr/share/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
 # ZSH Syntax Highlighting
-if [[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
-    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
