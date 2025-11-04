@@ -46,8 +46,8 @@ docker run -d \
 --name postgres-dojo-instance-01 \
 -e POSTGRES_PASSWORD=mysecretpassword \
 -e POSTGRES_USER=postgres \
--e POSTGRES_DB=postgres \
+-e POSTGRES_DB=postgres_dojo \
 -p 127.0.0.1:5432:5432 \
 -v postgres-dojo-instance-01-saved-databases:/var/lib/postgresql \
 -v postgres-dojo-instance-01-user-home:/home/postgres-dojo-user \
-dezlymacauley/postgres-dojo:0.0.1
+dezlymacauley/postgres-dojo:0.0.3

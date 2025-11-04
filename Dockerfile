@@ -92,3 +92,10 @@ RUN echo "source ${HOME}/.config/.zshrc" > ${HOME}/.zshrc
 RUN chown -R root:root ${HOME}/.config ${HOME}/.zshrc
 
 #______________________________________________________________________________
+# SECTION: Initialize default Postgres database
+
+# This tells the Postgres image to automatically create a database
+# named `postgres_dojo` when the container starts
+ENV POSTGRES_DB=postgres_dojo
+
+#______________________________________________________________________________
