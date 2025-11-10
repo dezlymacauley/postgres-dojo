@@ -8,6 +8,6 @@ SCRIPTS_DIR="$(dirname "${BASH_SOURCE[0]}")"
 PROJECT_ROOT="$(cd "$SCRIPTS_DIR/.." && pwd)"
 
 docker buildx build --load \
--t dezlymacauley/postgres-dojo:0.0.3 \
+-t dezlymacauley/postgres-dojo:0.0.4 \
 -f "$PROJECT_ROOT/Dockerfile" \
 "$PROJECT_ROOT"

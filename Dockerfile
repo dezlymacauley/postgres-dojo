@@ -3,7 +3,7 @@
 # This will download the official Postgres Docker image from Docker Hub
 # Version 18 of the Postgres database will be used, 
 # and the operating system that will be used is Trixie (aka Debian 13.0)
-FROM postgres:18.0-trixie
+FROM postgres:17.6-trixie
 
 # Create the working directory
 RUN mkdir -p /home/postgres-dojo-user
@@ -32,16 +32,19 @@ WORKDIR /home/postgres-dojo-user
 # And finally the package cache will be cleared 
 # to reduce the final image size.
 RUN apt-get update \
-&& apt-get install -y zsh \
-&& apt-get install -y zsh-autosuggestions \
-&& apt-get install -y zsh-syntax-highlighting \
+&& apt-get install -y \
+postgresql-17-pgvector \
+zsh \
+zsh-autosuggestions \
+zsh-syntax-highlighting \
+starship \
+lsd \
+bat \
+neovim \
+pgcli \
 && chsh -s /bin/zsh $(whoami) \
-&& apt-get install -y starship \
-&& apt-get install -y lsd \
-&& apt-get install -y bat \
-&& apt-get install -y neovim \
-&& apt-get install -y pgcli \
 && rm -rf /var/lib/apt/lists/*
+
 
 # NOTE: The command for neovim is nvim
 
