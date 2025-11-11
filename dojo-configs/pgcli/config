@@ -9,7 +9,7 @@ show_bottom_toolbar = False
 # No history file
 # history_file = /dev/null
 
-prompt = "\x1b[1;38;5;134m\d\x1b[0m🥋 \n "
+prompt = "\x1b[1;38;5;134m\d\x1b[0m 🥋 \n "
 
 # Changes the colour theme.
 # I find this theme more readable since my terminal has a darak background.
