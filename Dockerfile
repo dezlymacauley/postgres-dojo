@@ -34,6 +34,7 @@ WORKDIR /home/postgres-dojo-user
 RUN apt-get update \
 && apt-get install -y \
 postgresql-17-pgvector \
+csvkit \
 zsh \
 zsh-autosuggestions \
 zsh-syntax-highlighting \

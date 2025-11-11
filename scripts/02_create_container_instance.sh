@@ -46,4 +46,4 @@ docker run -d \
 -p 127.0.0.1:5432:5432 \
 -v postgres-dojo-instance-01-saved-databases:/var/lib/postgresql/data \
 -v postgres-dojo-instance-01-user-home:/home/postgres-dojo-user \
-dezlymacauley/postgres-dojo:0.0.4
+dezlymacauley/postgres-dojo:0.0.5
